@@ -1,0 +1,69 @@
+show dbs
+show collections
+
+use phenixDb
+
+
+How to insert as document to collection on mongo shell (read command prompt):
+    db.foodItem.insert({
+        name: "Batata Wada",
+        price: 15,
+        description: "created using potato",
+        createdOn: new Date(),
+        isDeleted: 0
+    })
+
+Find All Documents in collection:
+    db.foodItem.find({})
+
+Find All Documents with price 10:
+
+    db.foodItem.find({ price: 10 });
+
+Update a field say price in document:
+
+    db.foodItem.updateOne(
+        { _id: ObjectId('6620cb0fede3e9b7e7a7f186') },
+        {
+            $set: { 'price': 45 }
+        }
+    )
+
+Update all fields  in document:
+
+    db.foodItem.updateOne(
+        { _id: ObjectId('6620cb0fede3e9b7e7a7f186') },
+        {
+            $set: { 
+                'price': 456 ,
+                'name':'samosa vado',
+                'description':'made up of samoso',
+                'createdOn':new Date(),
+                'isDeleted':false
+            }
+        }
+    )
+
+Soft Delete Document:
+    Here  we are updating a document and also adding new field deletedOn to document.
+    db.foodItem.updateOne(
+            { _id: ObjectId('6620d250581e7cc759ef634c') },
+            [
+                {
+                    $set: { 'isDeleted': true,'deletedOn':new Date()}
+                },
+                {
+                    $addFields: { deletedOn: new Date() },
+                }
+            ],
+            { new: true }
+        )
+ db.foodItem.updateOne(
+        { _id: ObjectId('6620cb0fede3e9b7e7a7f186') },
+        {
+            $set: { 'isDeleted': true}
+        }
+    )
+Delete document:
+
+   db.foodItem.deleteOne( { _id: ObjectId('6620cb0fede3e9b7e7a7f186')} )
