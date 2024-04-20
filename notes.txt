@@ -67,3 +67,14 @@ Soft Delete Document:
 Delete document:
 
    db.foodItem.deleteOne( { _id: ObjectId('6620cb0fede3e9b7e7a7f186')} )
+
+
+Give access to user on database in mongodb:
+Use admin;
+db.grantRolesToUser(
+  "sangram",
+  [
+    { role: "readWrite", db: "phenixDb" }, // Read and write access
+    { role: "dbAdmin", db: "phenixDb" } // Database admin access
+  ]
+);

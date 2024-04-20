@@ -1,29 +1,25 @@
-Today we explore how to create CRUD operation with express.js and mongodb as database.
+Today we explore how to create CRUD operation with express.js and mongodb as
+database.
+
 mongoose is an orm that is usually used for connecting mongodb with node.js.
 
 Lets get started.
 
-create express.js app using genenerator
-    express --view=ejs express-mongoose
+create express.js app using genenerator express --view=ejs express-mongoose
 
-It will create express-mongoose folder ,cd into this folder & run
-    npm i
+It will create express-mongoose folder ,cd into this folder & run npm i
 
-Update express.js package to latest
-    npm install express@latest
+Update express.js package to latest npm install express@latest
 
-install nodemon
-    npm install nodemon --save-dev
+install nodemon npm install nodemon --save-dev
 
-update package.json to use nodemon
-    In package.json find
-        "start": "node ./bin/www"
+update package.json to use nodemon In package.json find "start": "node
+    ./bin/www"
 
     and change it to 
         "start": "nodemon ./bin/www"
 
-Now install mongoose package
-    npm i mongoose --save
+Now install mongoose package npm i mongoose --save
 
 Assuming you have opened project in an ide,I am using visual studio code,add
 models folder to root and add foodItem.js into this folder.
@@ -43,12 +39,15 @@ let foodItemSchema = new Schema({
   isDeleted: { type: Boolean, default: false },
 });
 
-let FoodItem = mongoose.model("FoodItem", foodItemSchema, "foodItem"); //last one is actual colelction name in db and its essential
+ //last one is actual collection name in db and its essential
+let FoodItem = mongoose.model("FoodItem", foodItemSchema, "foodItem");
 
 module.exports = {
   FoodItem: FoodItem,
   FoodItemSchema: foodItemSchema,
 };
+
+
 
 Here we are defining schema of our document foodItem.Our database is 'phenixDb'
 
@@ -304,23 +303,21 @@ app.use('/demo', demoRouter);
 
 to suitable place.
 
-Mean-while I already have a project running on 3000 port so I added .env file to root folder
+Mean-while I already have a project running on 3000 port so I added .env file to
+root folder
 
 content of .env file
 
     PORT=3001
 
-To use this port when we npm start,we need to install dotenv package.
-    npm install dotenv --save
+To use this port when we npm start,we need to install dotenv package. npm
+    install dotenv --save
 
-Now go to bin/www
-  and add 
-    require('dotenv').config()
+Now go to bin/www and add require('dotenv').config()
 
-Now you can run our application by issuing "npm start" command.
-You can access the api created by using Postman app.
-E.g.
-   To use search API we need to hit below endpoint,it GET api. 
-   http://localhost:3001/demo/search?keyword=potato
+Now you can run our application by issuing "npm start" command. You can access
+the api created by using Postman app. E.g. To use search API we need to hit
+below endpoint,it GET api. http://localhost:3001/demo/search?keyword=potato
 
-The complete code of project is available on github at 
+The complete code of this project is available on github at
+      https://github.com/gitsangramdesai/express-mongoose-crud

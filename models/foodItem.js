@@ -1,7 +1,9 @@
 let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
-mongoose.connect("mongodb://localhost/phenixDb");
+//# --> %23 requires url encoding
+mongoose.connect("mongodb://sangram:sangram%2381@127.0.0.1:27017/phenixDb?directConnection=true&serverSelectionTimeoutMS=2000&authSource=admin&appName=mongosh+2.2.3");
+
 
 let foodItemSchema = new Schema({
   name: String,
@@ -11,7 +13,8 @@ let foodItemSchema = new Schema({
   isDeleted: { type: Boolean, default: false },
 });
 
-let FoodItem = mongoose.model("FoodItem", foodItemSchema, "foodItem"); //last one is actual colelction name in db and its essential
+//last one is actual collection name in db and its essential
+let FoodItem = mongoose.model("FoodItem", foodItemSchema, "foodItem"); 
 
 module.exports = {
   FoodItem: FoodItem,
